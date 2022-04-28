@@ -30,3 +30,7 @@ app.route('/').put ((req,res) => {
 })
 
 app.route('/').get ((req,res) => res.send(author))
+
+app.route('/:identificador').delete ((req,res) => {
+    res.send(req.params.identificador)
+})
