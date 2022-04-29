@@ -1,4 +1,8 @@
 const express = require('express')
+const req = require('express/lib/request')
+
+const axios = require('axios')
+
 const app = express() // iniciando o express
 app.listen('3000')
 
@@ -18,7 +22,7 @@ let author = "Arcelinda"
 
 
 app.route('/').post((req, res) => {
-    data.push(req.body)      
+    //data.push(req.body)      
     res.send(req.body)
 
 })
@@ -28,10 +32,17 @@ app.route('/').put((req, res) => {
     res.send(author)
 
 })
-
+/*
 app.route('/').get((req, res) => res.send(author))
 
+app.route('/:identificador').delete((req, res) => {
+    
+    res.send(req.params.identificador)
+  })*/
+
 //Delete
+/*
+
 app.route('/:identificador').delete((req, res) => {
     let idToDelete = req.params.identificador
     let result = []
@@ -48,3 +59,13 @@ app.route('/:identificador').delete((req, res) => {
 })
 
 let data = []
+*/
+
+app.route('/').get ((req,res) => {
+
+    axios.get('https://api.github.com/users/Arcelinda')
+//.then(result =>res.send(result.data.avatar_url))
+.then(result =>res.send(`<img src = "${result.data.avatar_url}"/>`))
+.catch(error =>console.error(error))
+
+})
